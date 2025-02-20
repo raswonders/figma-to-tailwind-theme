@@ -1,9 +1,12 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Navbar } from "./Navbar";
+
+export type TailwindVer = "v3" | "v4";
 
 function App() {
   const configRef = useRef<HTMLTextAreaElement | null>(null);
   const copyRef = useRef<HTMLButtonElement | null>(null);
+  const [tailwindVer, setTailwindVer] = useState<TailwindVer>("v3");
 
   useEffect(() => {
     if (copyRef.current) {
@@ -11,7 +14,9 @@ function App() {
         configRef.current?.select();
         document.execCommand("copy");
         parent.postMessage(
-          { pluginMessage: "notify", message: "Copied to clipboard" },
+          {
+            pluginMessage: { type: "notify", text: "Copied to clipboard" },
+          },
           "*",
         );
       });
@@ -19,18 +24,30 @@ function App() {
   }, []);
 
   useEffect(() => {
-    parent.postMessage({ pluginMessage: "generate" }, "*");
     window.addEventListener("message", (event) => {
-      const config = event.data.pluginMessage;
-      if (configRef.current) {
-        configRef.current.innerHTML = config;
+      const message = event.data.pluginMessage;
+      if ((message.type = "theme")) {
+        if (configRef.current) {
+          configRef.current.innerHTML = message.text;
+        }
       }
     });
   }, []);
 
+  useEffect(() => {
+    parent.postMessage(
+      { pluginMessage: { type: "generate", text: tailwindVer } },
+      "*",
+    );
+  }, [tailwindVer]);
+
   return (
     <main className="flex flex-col h-full">
-      <Navbar copyRef={copyRef} />
+      <Navbar
+        copyRef={copyRef}
+        tailwindVer={tailwindVer}
+        setTailwindVer={setTailwindVer}
+      />
       <textarea
         readOnly
         ref={configRef}

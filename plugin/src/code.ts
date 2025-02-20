@@ -24,12 +24,15 @@ function setupUI() {
   figma.showUI(__html__, { themeColors: true, width: 800, height: 600 });
 
   figma.ui.onmessage = async (message) => {
-    if (message === "generate") {
-      figma.ui.postMessage(await getTwConfigStr());
+    if (message.type === "generate") {
+      figma.ui.postMessage({
+        type: "theme",
+        text: await getTwConfigStr(message.text),
+      });
     }
 
-    if (message === "notify") {
-      figma.notify("Copied to clipboard");
+    if (message.type === "notify") {
+      figma.notify(message.text);
     }
   };
 }

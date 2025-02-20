@@ -24,8 +24,7 @@ async function fetchFigmaTokens() {
   }
 }
 
-export async function getTwConfigStr() {
-  await fetchFigmaTokens();
+export async function getThemeV3() {
   const hasColors =
     Object.keys(varColors).length + Object.keys(styleColors).length > 0;
   const hasFonts = Object.keys(styleFonts).length > 0;
@@ -61,4 +60,20 @@ export async function getTwConfigStr() {
   }
 
   return result;
+}
+
+async function getThemeV4() {
+  return "TODO: implement v4 theme";
+}
+
+export async function getTwConfigStr(version = "v4") {
+  await fetchFigmaTokens();
+
+  if (version == "v3") {
+    return getThemeV3();
+  } else if (version == "v4") {
+    return getThemeV4();
+  } else {
+    return "Unknown tailwind version";
+  }
 }
