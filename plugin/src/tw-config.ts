@@ -66,7 +66,7 @@ async function getThemeV4() {
   return "TODO: implement v4 theme";
 }
 
-export async function getTwConfigStr(version = "v4") {
+export async function getTheme(version = "v4") {
   await fetchFigmaTokens();
 
   if (version == "v3") {

@@ -1,11 +1,11 @@
-import { getTwConfigStr } from "./tw-config";
+import { getTheme } from "./tw-config";
 
 if (figma.editorType === "figma") {
   setupUI();
 } else if (figma.editorType === "dev") {
   if (figma.mode === "codegen") {
     figma.codegen.on("generate", async () => {
-      const code = await getTwConfigStr();
+      const code = await getTheme();
 
       return [
         {
@@ -27,7 +27,7 @@ function setupUI() {
     if (message.type === "generate") {
       figma.ui.postMessage({
         type: "theme",
-        text: await getTwConfigStr(message.text),
+        text: await getTheme(message.text),
       });
     }
 
