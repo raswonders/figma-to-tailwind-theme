@@ -10,9 +10,9 @@ interface NavbarProps {
 
 export function Navbar({ copyRef, tailwindVer, setTailwindVer }: NavbarProps) {
   return (
-    <div className="p-1 flex justify-between items-center text-xs">
+    <div className="ps-3 flex justify-between items-center text-xs">
       <div>
-        <label className="ps-3 text-base font-normal">
+        <label className="text-base font-normal">
           Tailwindcss
           <select
             className="ml-1 rounded-md border bg-[var(--figma-color-bg-secondary)] border-[var(--figma-color-border)]"

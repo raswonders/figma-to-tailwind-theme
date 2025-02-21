@@ -48,10 +48,14 @@ function App() {
         tailwindVer={tailwindVer}
         setTailwindVer={setTailwindVer}
       />
+      <p className="ps-3 pt-3 pb-1 text-sm font-mono]">
+        # place below contents into{" "}
+        {tailwindVer === "v3" ? "tailwind.config.js" : "index.css"}
+      </p>
       <textarea
         readOnly
         ref={configRef}
-        className="config p-3 flex-1 resize-none font-mono text-xs"
+        className="p-3 config flex-1 resize-none font-mono text-xs"
         id="config"
       ></textarea>
     </main>
