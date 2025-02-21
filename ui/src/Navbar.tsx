@@ -20,8 +20,8 @@ export function Navbar({ copyRef, tailwindVer, setTailwindVer }: NavbarProps) {
             value={tailwindVer}
             onChange={(e) => setTailwindVer(e.target.value as TailwindVer)}
           >
-            <option value="v3">v3</option>
             <option value="v4">v4</option>
+            <option value="v3">v3</option>
           </select>
         </label>
       </div>

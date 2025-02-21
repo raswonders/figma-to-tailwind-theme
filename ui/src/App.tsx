@@ -6,7 +6,7 @@ export type TailwindVer = "v3" | "v4";
 function App() {
   const configRef = useRef<HTMLTextAreaElement | null>(null);
   const copyRef = useRef<HTMLButtonElement | null>(null);
-  const [tailwindVer, setTailwindVer] = useState<TailwindVer>("v3");
+  const [tailwindVer, setTailwindVer] = useState<TailwindVer>("v4");
 
   useEffect(() => {
     if (copyRef.current) {
