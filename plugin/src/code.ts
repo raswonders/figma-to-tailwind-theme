@@ -1,4 +1,4 @@
-import { getTheme } from "./tw-config";
+import { getTheme } from "./tailwind-theme";
 
 if (figma.editorType === "figma") {
   setupUI();

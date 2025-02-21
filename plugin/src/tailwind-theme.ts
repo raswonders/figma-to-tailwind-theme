@@ -1,7 +1,7 @@
 import { getColorsFromVars, getColorsFromStyles, Colors } from "./colors";
 import { Fonts, getFontsFromStyles } from "./fonts";
 
-interface TwConfig {
+interface ThemeV3 {
   theme: {
     extend: {
       colors?: Colors;
@@ -24,30 +24,30 @@ async function fetchFigmaTokens() {
   }
 }
 
-export async function getThemeV3() {
+async function getThemeV3() {
   const hasColors =
     Object.keys(varColors).length + Object.keys(styleColors).length > 0;
   const hasFonts = Object.keys(styleFonts).length > 0;
 
-  const twConfig: TwConfig = {
+  const twTheme: ThemeV3 = {
     theme: {
       extend: {},
     },
   };
 
   if (hasColors) {
-    twConfig.theme.extend.colors = { ...styleColors, ...varColors };
+    twTheme.theme.extend.colors = { ...styleColors, ...varColors };
   }
 
   if (hasFonts) {
-    twConfig.theme.extend.fontFamily = { ...styleFonts };
+    twTheme.theme.extend.fontFamily = { ...styleFonts };
   }
 
   let result = "";
   try {
     result =
       hasColors || hasFonts
-        ? `"theme":  ${JSON.stringify(twConfig.theme, null, 2)}`
+        ? `"theme":  ${JSON.stringify(twTheme.theme, null, 2)}`
         : "No colors or fonts on this page";
   } catch (err) {
     if (err instanceof Error) {
