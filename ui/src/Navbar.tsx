@@ -15,7 +15,7 @@ export function Navbar({ copyRef, tailwindVer, setTailwindVer }: NavbarProps) {
         <label className="ps-3 text-base font-normal">
           Tailwindcss
           <select
-            className="font-bold"
+            className="ml-1 rounded-md border bg-[var(--figma-color-bg-secondary)] border-[var(--figma-color-border)]"
             id="tw-version"
             value={tailwindVer}
             onChange={(e) => setTailwindVer(e.target.value as TailwindVer)}
