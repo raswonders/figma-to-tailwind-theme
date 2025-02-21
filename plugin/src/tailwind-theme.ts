@@ -70,6 +70,9 @@ async function getThemeV4() {
   for (let color of Object.keys(varColors)) {
     CSSEntries += `  --color-${color}: ${varColors[color]};\n`;
   }
+  for (let fontName of Object.keys(styleFonts)) {
+    CSSEntries += `  --font-${fontName}: "${styleFonts[fontName]}";\n`;
+  }
 
   return `@theme {\n${CSSEntries}}`;
 }
