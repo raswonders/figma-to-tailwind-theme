@@ -5,23 +5,7 @@ export type TailwindVer = "v3" | "v4";
 
 function App() {
   const configRef = useRef<HTMLTextAreaElement | null>(null);
-  const copyRef = useRef<HTMLButtonElement | null>(null);
   const [tailwindVer, setTailwindVer] = useState<TailwindVer>("v4");
-
-  useEffect(() => {
-    if (copyRef.current) {
-      copyRef.current.addEventListener("click", (event) => {
-        configRef.current?.select();
-        document.execCommand("copy");
-        parent.postMessage(
-          {
-            pluginMessage: { type: "notify", text: "Copied to clipboard" },
-          },
-          "*",
-        );
-      });
-    }
-  }, []);
 
   useEffect(() => {
     window.addEventListener("message", (event) => {
@@ -44,7 +28,7 @@ function App() {
   return (
     <main className="flex flex-col h-full">
       <Navbar
-        copyRef={copyRef}
+        configRef={configRef}
         tailwindVer={tailwindVer}
         setTailwindVer={setTailwindVer}
       />

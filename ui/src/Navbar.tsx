@@ -3,12 +3,16 @@ import { Dispatch, SetStateAction } from "react";
 import type { TailwindVer } from "../../ui/src/App";
 
 interface NavbarProps {
-  copyRef: React.RefObject<HTMLButtonElement>;
+  configRef: React.RefObject<HTMLTextAreaElement>;
   tailwindVer: TailwindVer;
   setTailwindVer: Dispatch<SetStateAction<TailwindVer>>;
 }
 
-export function Navbar({ copyRef, tailwindVer, setTailwindVer }: NavbarProps) {
+export function Navbar({
+  configRef,
+  tailwindVer,
+  setTailwindVer,
+}: NavbarProps) {
   return (
     <div className="ps-3 flex justify-between items-center text-xs">
       <div>
@@ -25,7 +29,19 @@ export function Navbar({ copyRef, tailwindVer, setTailwindVer }: NavbarProps) {
           </select>
         </label>
       </div>
-      <button className="copy-button p-2 bg-transparent" ref={copyRef}>
+      <button
+        className="copy-button p-2 bg-transparent"
+        onClick={() => {
+          configRef.current?.select();
+          document.execCommand("copy");
+          parent.postMessage(
+            {
+              pluginMessage: { type: "notify", text: "Copied to clipboard" },
+            },
+            "*",
+          );
+        }}
+      >
         <ClipboardCopy size={20} strokeWidth={1.5} />
       </button>
     </div>
