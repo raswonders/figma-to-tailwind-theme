@@ -63,7 +63,15 @@ async function getThemeV3() {
 }
 
 async function getThemeV4() {
-  return "TODO: implement v4 theme";
+  let CSSEntries = "";
+  for (let color of Object.keys(styleColors)) {
+    CSSEntries += `  --color-${color}: ${styleColors[color]};\n`;
+  }
+  for (let color of Object.keys(varColors)) {
+    CSSEntries += `  --color-${color}: ${varColors[color]};\n`;
+  }
+
+  return `@theme {\n${CSSEntries}}`;
 }
 
 export async function getTheme(version = "v4") {
