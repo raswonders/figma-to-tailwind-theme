@@ -8,14 +8,19 @@ function App() {
   const [tailwindVer, setTailwindVer] = useState<TailwindVer>("v4");
 
   useEffect(() => {
-    window.addEventListener("message", (event) => {
+    const handleThemeMessage = (event: MessageEvent) => {
       const message = event.data.pluginMessage;
       if ((message.type = "theme")) {
         if (configRef.current) {
           configRef.current.innerHTML = message.text;
         }
       }
-    });
+    };
+
+    window.addEventListener("message", handleThemeMessage);
+    return () => {
+      window.removeEventListener("message", handleThemeMessage);
+    };
   }, []);
 
   useEffect(() => {
