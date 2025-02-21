@@ -4,15 +4,15 @@ import { Navbar } from "./Navbar";
 export type TailwindVer = "v3" | "v4";
 
 function App() {
-  const configRef = useRef<HTMLTextAreaElement | null>(null);
+  const themeRef = useRef<HTMLTextAreaElement | null>(null);
   const [tailwindVer, setTailwindVer] = useState<TailwindVer>("v4");
 
   useEffect(() => {
     const handleThemeMessage = (event: MessageEvent) => {
       const message = event.data.pluginMessage;
       if ((message.type = "theme")) {
-        if (configRef.current) {
-          configRef.current.innerHTML = message.text;
+        if (themeRef.current) {
+          themeRef.current.innerHTML = message.text;
         }
       }
     };
@@ -33,7 +33,7 @@ function App() {
   return (
     <main className="flex flex-col h-full">
       <Navbar
-        configRef={configRef}
+        configRef={themeRef}
         tailwindVer={tailwindVer}
         setTailwindVer={setTailwindVer}
       />
@@ -43,7 +43,7 @@ function App() {
       </p>
       <textarea
         readOnly
-        ref={configRef}
+        ref={themeRef}
         className="p-3 config flex-1 resize-none font-mono text-xs"
         id="config"
       ></textarea>
