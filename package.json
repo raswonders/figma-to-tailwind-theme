@@ -1,7 +1,7 @@
 {
   "name": "tailwind-theme-gen",
   "private": true,
-  "version": "0.0.1",
+  "version": "0.1.0",
   "type": "module",
   "scripts": {
     "test": "npm run tsc && npm run build",
