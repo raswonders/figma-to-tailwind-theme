@@ -1,8 +1,8 @@
-![Tailwind Theme Gen - Figma plugin](/assets/title.png)
+![Tailwind Theme Gen - Figma plugin](/assets/title.webp)
 
 ## Overview
 
-Convert your Figma designs directly into Tailwindcss theme configurations. This plugin generates `tailwind.config.js` theme based on your design's styles, including support for multi-mode color variables and fonts.
+Convert your Figma design tokens directly into Tailwindcss theme. Generated theme is based on Figma styles and variables.
 
 ## Features
 
