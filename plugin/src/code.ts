@@ -1,11 +1,11 @@
-import { getTwConfigStr } from "./tw-config";
+import { getTheme } from "./tailwind-theme";
 
 if (figma.editorType === "figma") {
   setupUI();
 } else if (figma.editorType === "dev") {
   if (figma.mode === "codegen") {
     figma.codegen.on("generate", async () => {
-      const code = await getTwConfigStr();
+      const code = await getTheme();
 
       return [
         {
@@ -24,12 +24,15 @@ function setupUI() {
   figma.showUI(__html__, { themeColors: true, width: 800, height: 600 });
 
   figma.ui.onmessage = async (message) => {
-    if (message === "generate") {
-      figma.ui.postMessage(await getTwConfigStr());
+    if (message.type === "generate") {
+      figma.ui.postMessage({
+        type: "theme",
+        text: await getTheme(message.text),
+      });
     }
 
-    if (message === "notify") {
-      figma.notify("Copied to clipboard");
+    if (message.type === "notify") {
+      figma.notify(message.text);
     }
   };
 }
